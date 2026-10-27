@@ -1,0 +1,32 @@
+# dsh-lan-auth service (systemd user unit template)
+#
+# Install:
+#   mkdir -p ~/.config/systemd/user
+#   sed "s#__INSTALL_DIR__#$HOME/.local/share/dsh-lan-auth#g; s#__NODE__#$(command -v node)#g" \
+#     deploy/dsh-lan-auth.service > ~/.config/systemd/user/dsh-lan-auth.service
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now dsh-lan-auth.service
+#
+# Environment knobs (see packages/lan-auth/server.js for defaults):
+#   Environment=DSH_LAN_AUTH_PORT=3080
+#   Environment=DSH_LAN_AUTH_UPSTREAM=127.0.0.1:3080
+#   Environment=DSH_LAN_AUTH_UNIT=dsh-web
+#   Environment=DSH_LAN_AUTH_EXTRA_HOSTS=192.0.2.10,100.64.0.10
+
+[Unit]
+Description=Password gate for the DeepSeek Harness Web GUI (LAN / Tailscale)
+After=network-online.target __HARNESS_UNIT__.service
+Wants=network-online.target __HARNESS_UNIT__.service
+
+[Service]
+Type=simple
+WorkingDirectory=__INSTALL_DIR__
+Environment=HOME=%h
+ExecStart=__NODE__ __INSTALL_DIR__/server.js
+Restart=always
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

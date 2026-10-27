@@ -1,0 +1,36 @@
+# NOTICE
+
+This project is an independent, unaffiliated secondary development for
+DeepSeek Harness. It is not endorsed by, packaged with, or supported by
+DeepSeek.
+
+## Third-party components referenced or patched at runtime
+
+### DeepSeek Harness (`@deepseek-ai/dsh`)
+
+- License: MIT
+- Copyright: DeepSeek
+- Source: https://github.com/deepseek-ai/deepseek-harness
+- Relationship: this project runs alongside an installed DSH CLI and proxies
+  its Web GUI. No DSH code is copied or redistributed here.
+
+### `@linxin666/dsh-remote-web-ui` (DeepSeek Harness plugin)
+
+- License: Apache License 2.0
+- Author: linxin666 (zhu1090093659)
+- Source: https://github.com/zhu1090093659/dsh-web
+- Relationship: `scripts/patch-remote-web-ui.js` performs a small in-place
+  string replacement on the *locally installed, built* client bundle of this
+  plugin (it makes `remoteChannelRequired()` return `false`). The plugin's
+  source code and build artifacts are NOT included or redistributed in this
+  repository. The patch is applied by the user, to their own installation, and
+  the script keeps a `client.js.orig-<timestamp>` backup before writing.
+
+If you redistribute a modified copy of that plugin together with this project,
+you must comply with Apache License 2.0 (NOTICE retention, stating changes,
+and providing the license text).
+
+## Trademarks
+
+DeepSeek and DeepSeek Harness are trademarks of their respective owners. This
+project's name is descriptive and does not imply affiliation.

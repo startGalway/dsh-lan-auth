@@ -1,0 +1,17 @@
+{
+  "name": "@dsh-lan-auth/server",
+  "version": "1.0.0",
+  "description": "Password gate for a loopback-only DeepSeek Harness Web GUI, for LAN and Tailscale devices",
+  "private": true,
+  "bin": {
+    "dsh-lan-auth": "./server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node --check server.js",
+    "start": "node server.js"
+  },
+  "license": "MIT"
+}
